@@ -37,7 +37,7 @@ public class OhWeatherDB {
      */
     //只准同时一个获取
     public synchronized static OhWeatherDB getInstance(Context context) {
-        if (mOhWeather != null) {
+        if (mOhWeather == null) {
             mOhWeather = new OhWeatherDB(context);
         }
         return mOhWeather;
@@ -135,7 +135,7 @@ public class OhWeatherDB {
 
     /**
     * created at 24/12/2015 21:47
-    * function: 17.中数据库中读取乡镇信息
+    * function: 17.从数据库中读取乡镇信息
     */
     public List<County> loadCounties(int cityId){
         List<County> list = new ArrayList<>();
@@ -153,4 +153,5 @@ public class OhWeatherDB {
         }
         return list;
     }
+    //18->util:HttpUtil
 }
