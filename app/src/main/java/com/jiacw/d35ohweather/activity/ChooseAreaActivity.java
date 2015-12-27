@@ -54,21 +54,23 @@ public class ChooseAreaActivity extends Activity {
     private City selectedCity;
     //当前选中的级别
     private int currentLevel;
+    //40.声明是否为WeatherActivity中过来的
+    private boolean isFromWeatherActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //判断是否为天气界面过来的
-        if (!(getIntent().getBooleanExtra("from_weather_activity",false))) {
+       isFromWeatherActivity=getIntent().getBooleanExtra("from_weather_activity",false);
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
             //判断是否有选中的城市
-            if (preferences.getBoolean("city_selected", false)) {
+            if (preferences.getBoolean("city_selected", false)&&!isFromWeatherActivity) {
                 Intent intent = new Intent(this, WeatherActivity.class);
                 startActivity(intent);
                 finish();
                 return;
             }
-        }
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.choose_area);
         //获取控件实例
@@ -237,6 +239,11 @@ public class ChooseAreaActivity extends Activity {
         }else if (currentLevel==LEVEL_CITY){
             queryProvinces();
         }else {
+            //40
+            if (isFromWeatherActivity){
+                Intent intent=new Intent(this,WeatherActivity.class);
+                startActivity(intent);
+            }
             finish();
         }
     }
