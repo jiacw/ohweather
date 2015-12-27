@@ -239,7 +239,7 @@ public class ChooseAreaActivity extends Activity {
         }else if (currentLevel==LEVEL_CITY){
             queryProvinces();
         }else {
-            //40
+            //40,如果来自WeatherActivity，则退回——》Service： AutoUpdateService；
             if (isFromWeatherActivity){
                 Intent intent=new Intent(this,WeatherActivity.class);
                 startActivity(intent);

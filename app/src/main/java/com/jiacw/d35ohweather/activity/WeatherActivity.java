@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jiacw.d35ohweather.R;
+import com.jiacw.d35ohweather.service.AutoUpdateService;
 import com.jiacw.d35ohweather.util.HttpCallbackListener;
 import com.jiacw.d35ohweather.util.HttpUtil;
 import com.jiacw.d35ohweather.util.Utility;
@@ -163,6 +164,10 @@ public class WeatherActivity extends Activity implements View.OnClickListener{
         mTVCurrentDate.setText(preference.getString("current_date",""));
         mLLWeatherInfo.setVisibility(View.VISIBLE);
         mTVCityName.setVisibility(View.VISIBLE);
+        //45.启动后台服务
+        Intent intent =new Intent(this, AutoUpdateService.class);
+        startService(intent);
+        //46->Manifest
     }
 //39.修改 ChooseAreaActivity 中的代码
 
