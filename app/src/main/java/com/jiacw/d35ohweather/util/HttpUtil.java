@@ -1,6 +1,5 @@
 package com.jiacw.d35ohweather.util;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,12 +14,12 @@ import java.net.URL;
  */
 //18.处理网络请求——》创建接口
 public class HttpUtil {
-    public static void sendHttpRequest(final String address,final HttpCallbackListener listener){
+    public static void sendHttpRequest(final String address, final HttpCallbackListener listener) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 HttpURLConnection mUrlConnection = null;
-                BufferedReader reader = null;
+                BufferedReader reader;
                 try {
                     URL url = new URL(address);
                     mUrlConnection = (HttpURLConnection) url.openConnection();
@@ -28,22 +27,22 @@ public class HttpUtil {
                     mUrlConnection.setReadTimeout(8000);
                     mUrlConnection.setConnectTimeout(8000);
                     InputStream inputStream = mUrlConnection.getInputStream();
-                     reader = new BufferedReader(new InputStreamReader(inputStream));
-                    String line="";
+                    reader = new BufferedReader(new InputStreamReader(inputStream));
+                    String line;
                     StringBuilder response = new StringBuilder();
-                    while((line=reader.readLine())!=null){
+                    while ((line = reader.readLine()) != null) {
                         response.append(line);
                     }
-                    if (listener!=null){
+                    if (listener != null) {
                         listener.onFinish(response.toString());
                     }
                 } catch (IOException e) {
-                   if (listener!=null){
+                    if (listener != null) {
                         listener.onError(e);
-                   }
-                }finally {
+                    }
+                } finally {
                     //关闭连接
-                    if (mUrlConnection!=null){
+                    if (mUrlConnection != null) {
                         mUrlConnection.disconnect();
                     }
                 }

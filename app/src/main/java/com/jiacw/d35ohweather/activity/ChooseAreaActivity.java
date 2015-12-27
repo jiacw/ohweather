@@ -2,19 +2,18 @@ package com.jiacw.d35ohweather.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.jiacw.d35ohweather.R;
 import com.jiacw.d35ohweather.model.City;
 import com.jiacw.d35ohweather.model.County;
@@ -23,7 +22,6 @@ import com.jiacw.d35ohweather.model.Province;
 import com.jiacw.d35ohweather.util.HttpCallbackListener;
 import com.jiacw.d35ohweather.util.HttpUtil;
 import com.jiacw.d35ohweather.util.Utility;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +41,7 @@ public class ChooseAreaActivity extends Activity {
     private ListView mLV;
     private ArrayAdapter<String> mAdapter;
     private OhWeatherDB mOhWeatherDB;
-    private List<String> dataList = new ArrayList<String>();
+    private List<String> dataList = new ArrayList<>();
     //省列表
     private List<Province> mProvinceList;
     //市列表
@@ -60,13 +58,24 @@ public class ChooseAreaActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //判断是否为天气界面过来的
+        if (!(getIntent().getBooleanExtra("from_weather_activity",false))) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            //判断是否有选中的城市
+            if (preferences.getBoolean("city_selected", false)) {
+                Intent intent = new Intent(this, WeatherActivity.class);
+                startActivity(intent);
+                finish();
+                return;
+            }
+        }
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.choose_area);
         //获取控件实例
         mLV = (ListView) findViewById(R.id.ca_lv);
         mTVTitle = (TextView) findViewById(R.id.ca_tvTitle);
         //初始化适配器
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dataList);
+        mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dataList);
         //设置适配器
         mLV.setAdapter(mAdapter);
         //获取数据库操作实例
@@ -84,6 +93,14 @@ public class ChooseAreaActivity extends Activity {
                     case LEVEL_CITY:
                         selectedCity = mCityList.get(position);
                         queryCounties();
+                        break;
+                    case LEVEL_COUNTY:
+                        //获取选中的县代号
+                        String countyCode=mCountyList.get(position).getCountyCode();
+                        Intent intent=new Intent(ChooseAreaActivity.this,WeatherActivity.class);
+                        intent.putExtra("county_code",countyCode);
+                        startActivity(intent);
+                        finish();
                         break;
                 }
             }

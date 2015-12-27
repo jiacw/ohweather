@@ -16,6 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activity.WeatherActivity"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!--33.新建 weather_layout.xml-->
 </manifest>
