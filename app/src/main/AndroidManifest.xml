@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.jiacw.d35ohweather"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <!--48.添加图标-->
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/weather"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
