@@ -18,6 +18,9 @@ import com.jiacw.d35ohweather.util.HttpCallbackListener;
 import com.jiacw.d35ohweather.util.HttpUtil;
 import com.jiacw.d35ohweather.util.Utility;
 
+import net.youmi.android.banner.AdSize;
+import net.youmi.android.banner.AdView;
+
 /**
  * Created by Jiacw on 08:44 27/12/2015.
  * Email: 313133710@qq.com
@@ -68,6 +71,12 @@ public class WeatherActivity extends Activity implements View.OnClickListener{
         }
         btnRefreshWeather.setOnClickListener(this);
         btnSwitchCity.setOnClickListener(this);
+        //55.实例化广告条
+        AdView adView = new AdView(this, AdSize.FIT_SCREEN);
+        //56.获取要嵌入广告条的布局
+        LinearLayout adLayout = (LinearLayout) findViewById(R.id.adLayout);
+        //57.将广告条加入到布局中->Manifest
+        adLayout.addView(adView);
     }
 
     @Override

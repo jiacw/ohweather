@@ -109,5 +109,13 @@
                     android:textSize="40sp"/>
             </LinearLayout>
         </LinearLayout>
+        <!--53.添加广告布局-->
+        <LinearLayout
+            android:id="@+id/adLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"/>
+        <!--54->WeatherActivity-->
     </RelativeLayout>
 </LinearLayout>

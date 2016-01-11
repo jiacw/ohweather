@@ -22,6 +22,9 @@ import com.jiacw.d35ohweather.model.Province;
 import com.jiacw.d35ohweather.util.HttpCallbackListener;
 import com.jiacw.d35ohweather.util.HttpUtil;
 import com.jiacw.d35ohweather.util.Utility;
+
+import net.youmi.android.AdManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,11 +34,9 @@ import java.util.List;
  * Function:遍历省市县数据的活动
  */
 public class ChooseAreaActivity extends Activity {
-
     public static final int LEVEL_PROVINCE = 0;
     public static final int LEVEL_CITY = 1;
     public static final int LEVEL_COUNTY = 2;
-
     private ProgressDialog mProgressDialog;
     private TextView mTVTitle;
     private ListView mLV;
@@ -60,6 +61,9 @@ public class ChooseAreaActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //51.有米广告初始化
+        AdManager.getInstance(this).init("724ab49f7985539f","4e84a92c9158efda",false);
+        //52.->weather_layout.xml
         //判断是否为天气界面过来的
        isFromWeatherActivity=getIntent().getBooleanExtra("from_weather_activity",false);
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);

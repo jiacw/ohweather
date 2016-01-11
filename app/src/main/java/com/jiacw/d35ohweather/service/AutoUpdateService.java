@@ -10,6 +10,7 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 
+import com.jiacw.d35ohweather.receiver.AutoUpdateReceiver;
 import com.jiacw.d35ohweather.util.HttpCallbackListener;
 import com.jiacw.d35ohweather.util.HttpUtil;
 import com.jiacw.d35ohweather.util.Utility;
