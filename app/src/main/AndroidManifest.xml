@@ -2,6 +2,8 @@
 <manifest
     xmlns:tools="http://schemas.android.com/tools"
     package="com.jiacw.d35ohweather"
+    android:versionCode="2"
+    android:versionName="1.0.1"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <!--48.添加图标-->
     <application
@@ -22,8 +24,27 @@
         <activity android:name=".activity.WeatherActivity"/>
         <!--47.注册-->
         <service android:name=".service.AutoUpdateService"/>
-        <receiver android:name=".service.AutoUpdateReceiver"/>
+        <receiver android:name=".receiver.AutoUpdateReceiver"/>
+        <!--50添加内容-->
+       <activity android:name="net.youmi.android.AdBrowser"
+                 android:configChanges="keyboard|keyboardHidden|orientation"
+                 android:theme="@android:style/Theme.Light.NoTitleBar"/>
+        <service android:name="net.youmi.android.AdService"
+                 android:exported="false"/>
+        <receiver android:name="net.youmi.android.AdReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
+        <!--51.->ChooseAreaActivity-->
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!--49.添加有米jar包和权限-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <!--33.新建 weather_layout.xml-->
 </manifest>
